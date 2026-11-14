@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>OCA Medical Group - Concept Build</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,400;0,500;0,600;0,700;0,800;1,700;1,800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy:#0C2B81;
+  --navy-deep:#071d5c;
+  --cyan:#4EE4FF;
+  --cyan-ink:#06324a;
+  --blue:#2CA8E0;
+  --ink:#10151f;
+  --body:#444d5e;
+  --line:#e2e7ef;
+  --surface:#f4f7fb;
+  --radius:18px;
+  --shadow:0 18px 50px -24px rgba(12,43,129,.38);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;font-family:'Barlow',system-ui,-apple-system,Segoe UI,sans-serif;
+  color:var(--body);background:#fff;-webkit-font-smoothing:antialiased;line-height:1.6;
+}
+h1,h2,h3,h4{color:var(--ink);margin:0;line-height:1.12;letter-spacing:-.02em;font-weight:800}
+p{margin:0}
+a{color:inherit;text-decoration:none}
+img{max-width:100%;display:block}
+.wrap{width:min(1180px,92vw);margin-inline:auto}
+
+/* ---------- notice ---------- */
+.notice{background:#111826;color:#aab6cc;font-size:13px;padding:9px 0;text-align:center;letter-spacing:.01em}
+.notice b{color:#fff;font-weight:600}
+
+/* ---------- header ---------- */
+.hdr{position:sticky;top:0;z-index:60;background:rgba(255,255,255,.92);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+.hdr-in{display:flex;align-items:center;gap:28px;padding:14px 0}
+.logo{display:flex;align-items:center;gap:10px;flex:0 0 auto}
+.logo-mark{width:46px;height:46px;flex:0 0 auto}
+.logo-txt{font-weight:800;font-size:21px;color:var(--navy);line-height:1}
+.logo-txt span{display:block;font-size:11.5px;font-weight:600;letter-spacing:.22em;color:var(--blue);margin-top:4px}
+.nav{display:flex;gap:26px;margin-left:auto;font-weight:600;font-size:14.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink)}
+.nav a{position:relative;padding:6px 0}
+.nav a::after{content:"";position:absolute;left:0;bottom:0;height:2px;width:0;background:var(--cyan);transition:width .25s}
+.nav a:hover::after{width:100%}
+.hdr-cta{display:flex;gap:9px;align-items:center}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border:0;cursor:pointer;
+  font-family:inherit;font-weight:700;letter-spacing:.07em;text-transform:uppercase;
+  padding:12px 22px;border-radius:999px;font-size:13px;transition:transform .18s, box-shadow .18s, background .18s}
+.btn:hover{transform:translateY(-2px)}
+.btn-navy{background:var(--navy);color:#fff;box-shadow:0 10px 24px -14px var(--navy)}
+.btn-outline{background:#fff;color:var(--navy);box-shadow:inset 0 0 0 2px var(--navy)}
+.btn-cyan{background:var(--cyan);color:var(--cyan-ink);box-shadow:0 12px 26px -12px rgba(78,228,255,.9)}
+.btn-lg{padding:17px 36px;font-size:15px}
+.burger{display:none;background:none;border:0;padding:8px;cursor:pointer}
+.burger span{display:block;width:24px;height:2px;background:var(--navy);margin:5px 0;border-radius:2px;transition:.25s}
+
+/* ---------- hero ---------- */
+.hero{position:relative;overflow:hidden;color:#fff;isolation:isolate}
+.hero-bg{position:absolute;inset:0;z-index:-2;
+  background:
+   radial-gradient(1100px 620px at 78% 18%, rgba(78,228,255,.5), transparent 62%),
+   radial-gradient(900px 700px at 8% 86%, rgba(44,168,224,.46), transparent 60%),
+   linear-gradient(145deg,#0a2a86 0%,#124da8 48%,#1d7fc4 100%);}
+.hero-bg::after{content:"";position:absolute;inset:0;
+  background-image:linear-gradient(rgba(255,255,255,.055) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.055) 1px,transparent 1px);
+  background-size:62px 62px;mask-image:radial-gradient(70% 70% at 50% 40%,#000,transparent)}
+.spine{position:absolute;right:4%;top:50%;transform:translateY(-50%);width:min(430px,38vw);opacity:.3;z-index:-1}
+.hero-in{padding:104px 0 96px;max-width:760px}
+.eyebrow{display:inline-flex;align-items:center;gap:9px;font-size:12.5px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;
+  background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.26);padding:8px 16px;border-radius:999px;margin-bottom:26px}
+.dot{width:7px;height:7px;border-radius:50%;background:var(--cyan);box-shadow:0 0 0 4px rgba(78,228,255,.25)}
+.hero h1{color:#fff;font-size:clamp(38px,5.4vw,66px);font-style:italic;letter-spacing:-.025em}
+.hero h1 em{font-style:italic;color:var(--cyan);display:block}
+.hero-sub{margin-top:24px;font-size:clamp(17px,1.65vw,20.5px);color:rgba(255,255,255,.9);max-width:620px;font-weight:500}
+.hero-btns{display:flex;flex-wrap:wrap;gap:13px;margin-top:38px}
+.btn-ghost{background:rgba(255,255,255,.1);color:#fff;box-shadow:inset 0 0 0 2px rgba(255,255,255,.4)}
+.hero-note{margin-top:22px;font-size:14.5px;color:rgba(255,255,255,.72);display:flex;align-items:center;gap:9px}
+
+/* ---------- stats ---------- */
+.stats{background:var(--navy);color:#fff;border-top:1px solid rgba(255,255,255,.1)}
+.stats-in{display:grid;grid-template-columns:repeat(3,1fr);text-align:center;padding:44px 0}
+.stat{padding:8px 16px;position:relative}
+.stat+.stat::before{content:"";position:absolute;left:0;top:14%;bottom:14%;width:1px;background:rgba(255,255,255,.18)}
+.stat b{display:block;font-size:clamp(32px,3.6vw,46px);font-weight:800;color:var(--cyan);letter-spacing:-.02em;line-height:1}
+.stat span{display:block;margin-top:10px;font-size:12.5px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.78)}
+
+/* ---------- sections ---------- */
+section{padding:96px 0}
+.sec-head{text-align:center;max-width:780px;margin-inline:auto;margin-bottom:54px}
+.sec-head h2{font-size:clamp(30px,3.7vw,44px)}
+.sec-head p{margin-top:18px;font-size:17.5px}
+.kicker{display:block;font-size:12.5px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--blue);margin-bottom:16px}
+
+/* care cards */
+.care{display:grid;grid-template-columns:1fr 1fr;gap:26px}
+.care-card{border-radius:var(--radius);padding:44px 38px;color:#07243f;position:relative;overflow:hidden;transition:transform .3s, box-shadow .3s}
+.care-card:hover{transform:translateY(-6px);box-shadow:var(--shadow)}
+.care-card:first-child{background:linear-gradient(160deg,#5de9ff,#36cdf0)}
+.care-card:last-child{background:linear-gradient(160deg,#34b4e8,#1a87cc);color:#042338}
+.care-ico{width:56px;height:56px;margin-bottom:24px}
+.care-card h3{font-size:27px;color:inherit}
+.care-card p{margin-top:16px;font-size:16.5px;color:rgba(4,35,56,.86)}
+.care-link{display:inline-flex;align-items:center;gap:8px;margin-top:26px;font-weight:700;font-size:13.5px;letter-spacing:.09em;text-transform:uppercase;border-bottom:2px solid currentColor;padding-bottom:3px}
+
+/* two paths */
+.paths{display:grid;grid-template-columns:1fr 1fr;gap:26px;margin-top:26px}
+.path{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:40px 36px;text-align:center;display:flex;flex-direction:column}
+.path h3{font-size:23px;text-transform:uppercase;letter-spacing:-.01em}
+.path h3 small{display:block;font-size:15px;font-weight:700;color:var(--blue);text-transform:none;letter-spacing:0;margin-top:7px}
+.path p{margin-top:16px;font-size:16px}
+.path .fill{flex:1 1 auto;display:flex;align-items:center;justify-content:center;padding:26px 0}
+.video-card{width:100%;max-width:330px;aspect-ratio:16/10;border-radius:14px;position:relative;overflow:hidden;
+  background:linear-gradient(145deg,#1d7fc4,#0c2b81);display:flex;align-items:flex-end;padding:18px;cursor:pointer;box-shadow:var(--shadow)}
+.video-card::before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 70% 30%,rgba(78,228,255,.42),transparent 58%)}
+.play{position:absolute;inset:0;margin:auto;width:56px;height:56px;border-radius:50%;background:rgba(255,255,255,.94);display:grid;place-items:center;transition:transform .25s}
+.video-card:hover .play{transform:scale(1.1)}
+.play::after{content:"";border-left:15px solid var(--navy);border-top:9px solid transparent;border-bottom:9px solid transparent;margin-left:4px}
+.video-card b{position:relative;color:#fff;font-size:13px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;line-height:1.4}
+.ins-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:9px;width:100%;margin:4px 0}
+.ins{background:#fff;border:1px solid var(--line);border-radius:11px;height:62px;display:grid;place-items:center;
+  font-size:11px;font-weight:700;letter-spacing:.04em;color:#8c97ab;text-align:center;padding:6px;line-height:1.25;transition:.2s}
+.ins:hover{border-color:var(--cyan);color:var(--navy)}
+
+/* verify band */
+.verify{background:var(--surface);padding:0;overflow:hidden}
+.verify-in{display:grid;grid-template-columns:1fr 1fr;align-items:stretch}
+.verify-txt{padding:86px 7vw 86px 0}
+.verify-txt h2{font-size:clamp(28px,3.3vw,40px);font-style:italic;text-transform:uppercase}
+.verify-txt p{margin-top:20px;font-size:17px;max-width:460px}
+.verify-art{position:relative;min-height:420px;background:linear-gradient(140deg,#0c2b81,#2ca8e0)}
+.verify-art::after{content:"";position:absolute;inset:0;
+  background:radial-gradient(circle at 30% 30%,rgba(255,255,255,.22),transparent 55%),
+             repeating-linear-gradient(118deg,rgba(255,255,255,.055) 0 2px,transparent 2px 16px)}
+.xray{position:absolute;inset:0;margin:auto;width:60%;opacity:.5}
+
+/* about */
+.about{display:grid;grid-template-columns:.9fr 1.1fr;gap:56px;align-items:center}
+.about-art{border-radius:var(--radius);min-height:400px;background:linear-gradient(150deg,#dbe7f6,#aecbe8);position:relative;overflow:hidden;box-shadow:var(--shadow)}
+.about-art::after{content:"";position:absolute;inset:0;background:repeating-linear-gradient(90deg,rgba(255,255,255,.5) 0 3px,transparent 3px 34px);opacity:.55}
+.about-art b{position:absolute;left:24px;bottom:22px;font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:#28456e;font-weight:700}
+.about h2{font-size:clamp(30px,3.6vw,44px)}
+.about p{margin-top:20px;font-size:17px}
+.flag{margin-top:22px;border-left:3px solid var(--cyan);background:#f0fbff;padding:16px 20px;border-radius:0 12px 12px 0;font-size:15px;color:#0d3d57}
+.flag b{color:var(--navy)}
+
+/* booking */
+.book{background:var(--navy);color:#fff}
+.book-in{display:grid;grid-template-columns:.85fr 1.15fr;gap:36px;align-items:stretch}
+.book-form{background:#fff;border-radius:var(--radius);padding:36px 32px;color:var(--ink);box-shadow:0 28px 60px -30px #000}
+.book-form h3{font-size:25px;text-align:center}
+.book-form .free{text-align:center;color:var(--blue);font-weight:700;margin-top:6px;font-size:16px}
+.field{margin-top:12px}
+.field input,.field select{width:100%;padding:14px 16px;border-radius:10px;border:1px solid var(--line);background:var(--surface);
+  font-family:inherit;font-size:15.5px;color:var(--ink);transition:.2s}
+.field input:focus,.field select:focus{outline:0;border-color:var(--cyan);background:#fff;box-shadow:0 0 0 4px rgba(78,228,255,.25)}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.priv{margin-top:16px;font-size:12.5px;color:#7c879a;text-align:center;line-height:1.5}
+.btn-book{width:100%;margin-top:16px;background:linear-gradient(135deg,#1f9f52,#157a3d);color:#fff;padding:17px;font-size:15px}
+.book-map{border-radius:var(--radius);background:#e8eef6;position:relative;overflow:hidden;min-height:440px;border:5px solid #fff}
+.book-map::before{content:"";position:absolute;inset:0;
+  background-image:linear-gradient(rgba(170,186,208,.55) 1px,transparent 1px),linear-gradient(90deg,rgba(170,186,208,.55) 1px,transparent 1px);
+  background-size:52px 52px}
+.coast{position:absolute;inset:0}
+.pin{position:absolute;transform:translate(-50%,-100%);background:#1f9f52;color:#fff;font-size:11.5px;font-weight:700;
+  letter-spacing:.08em;text-transform:uppercase;padding:7px 12px;border-radius:7px;white-space:nowrap;box-shadow:0 8px 18px -8px rgba(0,0,0,.55)}
+.pin::after{content:"";position:absolute;left:50%;top:100%;transform:translateX(-50%);border:6px solid transparent;border-top-color:#1f9f52}
+.pin.primary{background:var(--navy)}
+.pin.primary::after{border-top-color:var(--navy)}
+
+/* testimonials */
+.quotes{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.quote{background:linear-gradient(160deg,#34b4e8,#2092cf);color:#fff;border-radius:var(--radius);padding:34px 28px;text-align:center;transition:transform .3s}
+.quote:hover{transform:translateY(-5px)}
+.av{width:62px;height:62px;border-radius:50%;background:rgba(255,255,255,.3);margin:0 auto 18px;display:grid;place-items:center;font-weight:800;font-size:20px;color:#fff}
+.quote p{font-size:16.5px;font-weight:500}
+.quote b{display:block;margin-top:16px;font-size:13px;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.82)}
+.stars{color:#ffd34d;letter-spacing:3px;margin-top:12px;font-size:15px}
+
+/* footer */
+footer{background:#07112a;color:#9eabc4;padding:72px 0 30px;font-size:15px}
+.f-grid{display:grid;grid-template-columns:1.5fr 1fr 1fr 1.2fr;gap:40px}
+footer h4{color:#fff;font-size:13px;letter-spacing:.18em;text-transform:uppercase;margin-bottom:18px}
+footer li{list-style:none;margin-bottom:10px}
+footer ul{padding:0;margin:0}
+footer a:hover{color:var(--cyan)}
+.f-logo{display:flex;align-items:center;gap:10px;margin-bottom:18px}
+.f-logo .logo-txt{color:#fff}
+.f-bot{margin-top:46px;padding-top:22px;border-top:1px solid rgba(255,255,255,.1);display:flex;flex-wrap:wrap;gap:14px;justify-content:space-between;font-size:13.5px}
+
+/* responsive */
+@media(max-width:980px){
+  .nav,.hdr-cta .btn-outline,.hdr-cta .btn-navy{display:none}
+  .burger{display:block;margin-left:auto}
+  .hdr-cta{margin-left:10px}
+  .care,.paths,.verify-in,.about,.book-in,.quotes,.f-grid{grid-template-columns:1fr}
+  .verify-txt{padding:60px 0}
+  .verify-art{min-height:280px;border-radius:var(--radius)}
+  .spine{display:none}
+  .hero-in{padding:72px 0 64px}
+  section{padding:68px 0}
+  .stats-in{padding:32px 0}
+  .stat b{font-size:30px}
+  .stat span{font-size:10.5px;letter-spacing:.12em}
+  .about-art{min-height:260px}
+}
+@media(max-width:560px){
+  .stats-in{grid-template-columns:1fr;gap:24px}
+  .stat+.stat::before{display:none}
+  .stat+.stat{border-top:1px solid rgba(255,255,255,.14);padding-top:24px}
+  .ins-grid{grid-template-columns:repeat(3,1fr)}
+  .row2{grid-template-columns:1fr}
+  .hero h1{font-size:34px}
+}
+</style>
+</head>
+<body>
+
+<div class="notice">Concept build for <b>OCA Medical Group</b> &nbsp;·&nbsp; Round 1, home page upper flow &nbsp;·&nbsp; built from your <b>OCA Home site.pdf</b> wireframe by Raynell Garcia</div>
+
+<header class="hdr">
+  <div class="wrap hdr-in">
+    <a class="logo" href="#">
+      <svg class="logo-mark" viewBox="0 0 64 64" fill="none" aria-hidden="true">
+        <path d="M30 10a22 22 0 100 44 22 22 0 01 0-44z" stroke="#0C2B81" stroke-width="5" stroke-linecap="round"/>
+        <path d="M44 14a22 22 0 100 36" stroke="#2CA8E0" stroke-width="5" stroke-linecap="round"/>
+        <path d="M46 24v16M38 32h16" stroke="#4EE4FF" stroke-width="5" stroke-linecap="round"/>
+      </svg>
+      <span class="logo-txt">OCA<span>Medical Group</span></span>
+    </a>
+    <nav class="nav">
+      <a href="#care">About</a><a href="#care">Conditions</a><a href="#care">Services</a><a href="#about">Partners</a><a href="#about">Blog</a>
+    </nav>
+    <div class="hdr-cta">
+      <a class="btn btn-outline" href="#book">Contact</a>
+      <a class="btn btn-navy" href="#verify">Verify</a>
+      <a class="btn btn-cyan" href="#book">Book</a>
+      <button class="burger" aria-label="Menu"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</header>
+
+<section class="hero" style="padding:0">
+  <div class="hero-bg"></div>
+  <svg class="spine" viewBox="0 0 120 300" fill="none" aria-hidden="true">
+    <g stroke="#fff" stroke-width="2.5" stroke-linecap="round">
+      <path d="M60 8v284"/>
+      <g>
+        <path d="M34 36h52M30 66h60M28 96h64M28 126h64M30 156h60M32 186h56M36 216h48M40 246h40"/>
+      </g>
+    </g>
+    <g fill="#4EE4FF" opacity=".85">
+      <rect x="44" y="26" width="32" height="18" rx="7"/><rect x="42" y="56" width="36" height="18" rx="7"/>
+      <rect x="42" y="86" width="36" height="18" rx="7"/><rect x="42" y="116" width="36" height="18" rx="7"/>
+      <rect x="43" y="146" width="34" height="18" rx="7"/><rect x="45" y="176" width="30" height="18" rx="7"/>
+      <rect x="47" y="206" width="26" height="18" rx="7"/><rect x="49" y="236" width="22" height="18" rx="7"/>
+    </g>
+  </svg>
+  <div class="wrap hero-in">
+    <span class="eyebrow"><i class="dot"></i> Newport Beach &nbsp;·&nbsp; Same-day surgical center</span>
+    <h1>Pain experts so good,<br>we don't want you coming back.<em>We want you cured.</em></h1>
+    <p class="hero-sub">We identify and fix the biomechanical cause of your pain, so you can move on with your life.</p>
+    <div class="hero-btns">
+      <a class="btn btn-cyan btn-lg" href="#book">Book a free consultation</a>
+      <a class="btn btn-ghost btn-lg" href="#verify">Verify my insurance</a>
+    </div>
+    <p class="hero-note">✓ Most PPO plans accepted &nbsp;·&nbsp; ✓ No cost to find out what's covered</p>
+  </div>
+</section>
+
+<div class="stats">
+  <div class="wrap stats-in">
+    <div class="stat"><b>50,000+</b><span>Happy patients</span></div>
+    <div class="stat"><b>10</b><span>Referring affiliates</span></div>
+    <div class="stat"><b>80+</b><span>Years experience</span></div>
+  </div>
+</div>
+
+<section id="care">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="kicker">All under one roof</span>
+      <h2>When you need the next level of care</h2>
+      <p>Our physicians, chiropractors, physical therapists and massage therapists use coordinated techniques to solve the biomechanical cause of your pain at the source, in ways others can't.</p>
+    </div>
+    <div class="care">
+      <article class="care-card">
+        <svg class="care-ico" viewBox="0 0 48 48" fill="none" aria-hidden="true">
+          <g stroke="#07243f" stroke-width="2.6" stroke-linecap="round">
+            <path d="M24 5v38"/><path d="M14 11h20M12 20h24M12 29h24M15 38h18"/>
+          </g>
+          <g fill="#07243f" opacity=".16">
+            <rect x="16" y="7" width="16" height="8" rx="3.5"/><rect x="14" y="17" width="20" height="8" rx="3.5"/>
+            <rect x="14" y="26" width="20" height="8" rx="3.5"/><rect x="17" y="35" width="14" height="8" rx="3.5"/>
+          </g>
+        </svg>
+        <h3>Interventional Care</h3>
+        <p>Minimally invasive procedures designed to address the underlying cause of pain rather than manage symptoms. Often used when conservative care alone is not enough.</p>
+        <a class="care-link" href="#">See conditions treated →</a>
+      </article>
+      <article class="care-card">
+        <svg class="care-ico" viewBox="0 0 48 48" fill="none" aria-hidden="true">
+          <path d="M13 13c-4-4-9-1-8 4 .6 3 4 4 6 3l12 12c-1 2 0 5.4 3 6 5 1 8-4 4-8-2.6-2.6-6-1.4-7.4.4L11 19c1.8-1.4 3.6-4 2-6z"
+            stroke="#042338" stroke-width="2.6" stroke-linejoin="round" fill="rgba(4,35,56,.14)"/>
+          <path d="M35 13c4-4 9-1 8 4-.6 3-4 4-6 3" stroke="#042338" stroke-width="2.6" stroke-linecap="round"/>
+        </svg>
+        <h3>Orthopedic Care</h3>
+        <p>Treatment of structural musculoskeletal conditions when conservative and interventional options are no longer effective, including procedures that relieve nerve pressure at the source.</p>
+        <a class="care-link" href="#">Meet the surgeons →</a>
+      </article>
+    </div>
+
+    <div class="paths">
+      <div class="path">
+        <h3>Know all your options<small>(before drugs or surgery)</small></h3>
+        <p>First we run a full diagnostic workup to address the pain at its source.</p>
+        <div class="fill">
+          <div class="video-card"><span class="play"></span><b>New patient experience:<br>what to expect</b></div>
+        </div>
+        <a class="btn btn-cyan" href="#book">Book a consultation</a>
+      </div>
+      <div class="path">
+        <h3>Know your coverage<small>(you may be covered)</small></h3>
+        <p>Proud providers for major insurance companies.</p>
+        <div class="fill">
+          <div class="ins-grid">
+            <div class="ins">United<br>Healthcare</div><div class="ins">Health<br>Plan</div><div class="ins">Aetna</div><div class="ins">NASI</div>
+            <div class="ins">Blue of<br>California</div><div class="ins">Blue Cross<br>Blue Shield</div><div class="ins">Coastwise</div><div class="ins" style="color:#b9c2d1">+ more</div>
+          </div>
+        </div>
+        <a class="btn btn-cyan" href="#verify">Verify my insurance</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="verify" id="verify">
+  <div class="wrap">
+    <div class="verify-in">
+      <div class="verify-txt">
+        <span class="kicker">No cost, no obligation</span>
+        <h2>Verify your insurance</h2>
+        <p>Fill out the form and we'll get back to you with exactly what your plan covers, from injections through surgery.</p>
+        <a class="btn btn-cyan btn-lg" style="margin-top:30px" href="#book">Claim offer</a>
+      </div>
+      <div class="verify-art">
+        <svg class="xray" viewBox="0 0 200 200" fill="none" aria-hidden="true">
+          <g stroke="#fff" stroke-width="2.4" stroke-linecap="round" opacity=".9">
+            <path d="M100 20v60M70 40c0 24 10 36 30 40M130 40c0 24-10 36-30 40"/>
+            <path d="M100 80c-18 0-30 12-30 28s8 26 8 42M100 80c18 0 30 12 30 28s-8 26-8 42"/>
+            <path d="M78 150v28M122 150v28"/>
+          </g>
+        </svg>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="about">
+  <div class="wrap about">
+    <div class="about-art"><b>Newport Beach · 4501 Birch St</b></div>
+    <div>
+      <span class="kicker">Welcome</span>
+      <h2>Welcome to OCA Medical Group</h2>
+      <p>OCA Medical Group delivers integrated, patient-focused care through fellowship-trained physicians in pain management, orthopedic surgery and spine neurosurgery, supported by chiropractic and physical medicine.</p>
+      <p style="margin-top:16px">As a multidisciplinary one-stop clinic, OCA offers on-site diagnostics and an attached ambulatory surgery center, so most patients go home the same day. The focus is long-term relief without reliance on addictive medication or unnecessary surgery.</p>
+      <div class="flag"><b>Copy note for the client:</b> the wireframe's About paragraph still describes Goodlife Physical Medicine under an OCA heading. I've rewritten it to OCA, pulled from your live site. Flagging it rather than shipping it as-is.</div>
+      <a class="btn btn-cyan btn-lg" style="margin-top:26px" href="#">Read more about us</a>
+    </div>
+  </div>
+</section>
+
+<section class="book" id="book">
+  <div class="wrap book-in">
+    <form class="book-form" onsubmit="event.preventDefault();this.querySelector('.btn-book').textContent='Demo only — not submitted';">
+      <h3>Book an appointment</h3>
+      <p class="free">Free consultations</p>
+      <div class="field"><select aria-label="Location"><option>Select location</option><option>Newport Beach, CA</option><option>Redondo Beach, CA</option><option>El Segundo, CA</option><option>Torrance, CA</option><option>Seal Beach, CA</option></select></div>
+      <div class="field row2"><input placeholder="First name" aria-label="First name"><input placeholder="Last name" aria-label="Last name"></div>
+      <div class="field"><input type="tel" placeholder="Phone" aria-label="Phone"></div>
+      <div class="field"><input type="email" placeholder="Email" aria-label="Email"></div>
+      <p class="priv">Your information is kept strictly confidential and used only to coordinate your care. We never share or sell your personal or medical details.</p>
+      <button class="btn btn-book" type="submit">Schedule appointment</button>
+    </form>
+    <div class="book-map" aria-label="Clinic locations map">
+      <svg class="coast" viewBox="0 0 600 460" fill="none" aria-hidden="true">
+        <path d="M-10 60 C120 90 190 150 250 210 C310 268 380 300 470 320 L610 350 L610 470 L-10 470 Z" fill="#c9d8ea"/>
+        <path d="M-10 60 C120 90 190 150 250 210 C310 268 380 300 470 320 L610 350" stroke="#8fa8c6" stroke-width="3"/>
+        <g stroke="#aebfd6" stroke-width="2.5" opacity=".8">
+          <path d="M120 150 L300 250 L470 300"/><path d="M200 120 L260 300"/><path d="M330 180 L390 400"/>
+        </g>
+      </svg>
+      <span class="pin" style="left:24%;top:40%">El Segundo</span>
+      <span class="pin" style="left:57%;top:34%">Torrance</span>
+      <span class="pin" style="left:29%;top:66%">Redondo Beach</span>
+      <span class="pin" style="left:72%;top:60%">Seal Beach</span>
+      <span class="pin primary" style="left:82%;top:82%">Newport Beach</span>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="sec-head"><h2>How we've helped others the OCA way</h2></div>
+    <div class="quotes">
+      <article class="quote"><div class="av">MR</div><p>"They ran a full diagnostic to find what the problem actually was, then showed me every option before anything invasive."</p><div class="stars">★★★★★</div><b>Pain management patient</b></article>
+      <article class="quote"><div class="av">JT</div><p>"Surgery was same day and I was home that afternoon. The follow-up was handled by the same team that did the workup."</p><div class="stars">★★★★★</div><b>Orthopedic patient</b></article>
+      <article class="quote"><div class="av">DS</div><p>"All things physical medicine, all under one roof. I didn't get bounced between four different offices."</p><div class="stars">★★★★★</div><b>Spine patient</b></article>
+    </div>
+    <p style="text-align:center;margin-top:26px;font-size:14px;color:#8c97ab">Placeholder copy. Final build pulls live reviews from Google so the section updates itself.</p>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="f-grid">
+      <div>
+        <div class="f-logo">
+          <svg class="logo-mark" viewBox="0 0 64 64" fill="none" aria-hidden="true">
+            <path d="M30 10a22 22 0 100 44 22 22 0 01 0-44z" stroke="#fff" stroke-width="5" stroke-linecap="round"/>
+            <path d="M44 14a22 22 0 100 36" stroke="#2CA8E0" stroke-width="5" stroke-linecap="round"/>
+            <path d="M46 24v16M38 32h16" stroke="#4EE4FF" stroke-width="5" stroke-linecap="round"/>
+          </svg>
+          <span class="logo-txt">OCA<span>Medical Group</span></span>
+        </div>
+        <p>Multi-specialty pain management, orthopedic surgery and spine care. Procedures performed at our ambulatory surgery center, so most patients go home the same day.</p>
+      </div>
+      <div><h4>Care</h4><ul><li><a href="#">Pain Management</a></li><li><a href="#">Orthopedic Surgery</a></li><li><a href="#">Spine &amp; Neurosurgery</a></li><li><a href="#">Sports Orthopedics</a></li><li><a href="#">Personal Injury</a></li></ul></div>
+      <div><h4>Patients</h4><ul><li><a href="#">Verify Insurance</a></li><li><a href="#">New Patient Forms</a></li><li><a href="#">What to Expect</a></li><li><a href="#">Meet the Doctors</a></li><li><a href="#">Blog</a></li></ul></div>
+      <div>
+        <h4>Newport Beach</h4>
+        <ul>
+          <li>4501 Birch St, Suite 101-A<br>Newport Beach, CA 92660</li>
+          <li style="margin-top:12px"><a href="tel:">Call the office</a></li>
+          <li>Minutes from John Wayne Airport</li>
+        </ul>
+      </div>
+    </div>
+    <div class="f-bot">
+      <span>© <span id="yr"></span> OCA Medical Group. All rights reserved.</span>
+      <span>Privacy Policy &nbsp;·&nbsp; Notice of Privacy Practices (HIPAA) &nbsp;·&nbsp; Accessibility</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+document.getElementById('yr').textContent=new Date().getFullYear();
+</script>
+</body>
+</html>
